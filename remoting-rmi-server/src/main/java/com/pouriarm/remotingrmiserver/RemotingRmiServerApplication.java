@@ -11,8 +11,11 @@ public class RemotingRmiServerApplication {
 
     // TODO: Create dictionaryService Bean that returns DictionaryImpl object.
     // Folow Spring boot documentation to learn how you can do it.
-    @Bean
     //
+    @Bean
+    Dictionary dictionaryService() {
+        return new DictionaryImpl();
+    }
 
     /**
      *  Expose a service via RMI. Remote obect URL is:
@@ -24,8 +27,13 @@ public class RemotingRmiServerApplication {
 
        //TODO: Complete this part and return the correct object!
         // Think About the return object. Should we return Dictionary object?
-
-        return implementation;
+        Class<Dictionary> serviceInterface = Dictionary.class;
+        RmiServiceExporter exporter = new RmiServiceExporter();
+        exporter.setServiceInterface(serviceInterface);
+        exporter.setService(implementation);
+        exporter.setServiceName(serviceInterface.getSimpleName());
+        exporter.setRegistryPort(6231);
+        return exporter;
     }
 
 

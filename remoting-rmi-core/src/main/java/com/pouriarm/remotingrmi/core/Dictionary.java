@@ -9,5 +9,6 @@ import java.util.Map;
  */
 public interface Dictionary {
     //TODO: Create two required methods (Hint: (String) and (String[]))
-
+    Map<String,Integer> word(String line) throws RemoteException;
+    Map<String,Integer> word(String []lineArray) throws RemoteException;
 }
